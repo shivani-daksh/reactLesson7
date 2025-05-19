@@ -39,10 +39,11 @@ if (!order) {
 
 
     const totalDeliveryTimeMs = orderProduct.estimatedDeliveryTimeMs - order.orderTimeMs;
-    //console.log(totalDeliveryTimeMs);
+    
 
     const timePassedMs = dayjs().valueOf() - order.orderTimeMs;
-    //console.log(timePassedMs);
+    
+   
     
     let deliveryPercent = (timePassedMs / totalDeliveryTimeMs) * 100;
   if (deliveryPercent > 100) {
@@ -63,7 +64,10 @@ if (!order) {
         </a>
 
         <div className="delivery-date">
-          Arriving on {dayjs(orderProduct.estimatedDeliveryTimeMs).format('dddd, MMMM D')}
+          {deliveryPercent >= 100 ? 'Delivered on ' : 'Arriving on ' }
+          {dayjs(orderProduct.estimatedDeliveryTimeMs).format('dddd, MMMM D') 
+          }
+          
         </div>
 
         <div className="product-info">
