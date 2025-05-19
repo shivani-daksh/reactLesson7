@@ -36,7 +36,18 @@ if (!order) {
     )
     )
     //console.log(orderProduct);
+
+
+    const totalDeliveryTimeMs = orderProduct.estimatedDeliveryTimeMs - order.orderTimeMs;
+    //console.log(totalDeliveryTimeMs);
+
+    const timePassedMs = dayjs().valueOf() - order.orderTimeMs;
+    //console.log(timePassedMs);
     
+    let deliveryPercent = (timePassedMs / totalDeliveryTimeMs) * 100;
+  if (deliveryPercent > 100) {
+    deliveryPercent = 100;
+  }
 
   return (
     <>
@@ -73,7 +84,7 @@ if (!order) {
         </div>
 
         <div className="progress-bar-container">
-          <div className="progress-bar"></div>
+          <div className="progress-bar" style={{width: `${deliveryPercent}%`}}></div>
         </div>
       </div>
     </div>
