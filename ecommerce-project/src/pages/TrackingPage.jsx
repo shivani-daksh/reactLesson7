@@ -13,14 +13,15 @@ const { orderId, productId } = useParams();
 
 
 useEffect(() => {
-axios.get(`/api/orders/${orderId}/?expand=products`)
-.then((response) => {
-  
 
-   setOrder(response.data);   
-});
+  const fetchTrackingData = async () => {
+ const response = await axios.get(`/api/orders/${orderId}/?expand=products`);
+   setOrder(response.data); 
+  };
 
-}, [orderId])
+  fetchTrackingData();
+
+}, [orderId]);
 
 // console.log(order);
 
@@ -34,7 +35,7 @@ if (!order) {
        orderProduct.productId === productId
     )
     )
-    console.log(orderProduct);
+    //console.log(orderProduct);
     
 
   return (
