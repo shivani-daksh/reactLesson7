@@ -23,7 +23,7 @@ useEffect(() => {
 
 }, [orderId]);
 
-// console.log(order);
+//console.log('order', order);
 
 
 if (!order) {
@@ -35,20 +35,48 @@ if (!order) {
        orderProduct.productId === productId
     )
     )
-    //console.log(orderProduct);
+   // console.log('orderProduct', orderProduct);
+
+
+
 
 
     const totalDeliveryTimeMs = orderProduct.estimatedDeliveryTimeMs - order.orderTimeMs;
+    //console.log(totalDeliveryTimeMs);
     
 
     const timePassedMs = dayjs().valueOf() - order.orderTimeMs;
+   // console.log(timePassedMs);
     
-   
+
+    let deliveryPercent = (timePassedMs / totalDeliveryTimeMs ) * 100;
+   // console.log(deliveryPercent);
     
-    let deliveryPercent = (timePassedMs / totalDeliveryTimeMs) * 100;
+
+
   if (deliveryPercent > 100) {
     deliveryPercent = 100;
   }
+
+
+
+  let isPreparing = false;
+  let isShipped = false;
+  let isDelivered = false;
+
+
+  if(deliveryPercent < 33){
+     isPreparing = true;
+  }
+  else if (deliveryPercent >=33 && deliveryPercent < 100){
+     isShipped = true ;
+  }
+  else if(deliveryPercent === 100){
+     isDelivered = true;
+  }
+
+
+
 
   return (
     <>
@@ -82,9 +110,9 @@ if (!order) {
         />
 
         <div className="progress-labels-container">
-          <div className="progress-label">Preparing</div>
-          <div className="progress-label current-status">Shipped</div>
-          <div className="progress-label">Delivered</div>
+          <div className={`progress-label ${isPreparing && 'current-status'}`}>Preparing</div>
+          <div className={`progress-label ${isShipped && 'current-status'}`}>Shipped</div>
+          <div className={`progress-label ${isDelivered && 'current-status'}`}>Delivered</div>
         </div>
 
         <div className="progress-bar-container">
