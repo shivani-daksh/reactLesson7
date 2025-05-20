@@ -60,20 +60,25 @@ if (!order) {
 
 
 
-  let isPreparing = false;
-  let isShipped = false;
-  let isDelivered = false;
+  // let isPreparing = false;
+  // let isShipped = false;
+  // let isDelivered = false;
 
 
-  if(deliveryPercent < 33){
-     isPreparing = true;
-  }
-  else if (deliveryPercent >=33 && deliveryPercent < 100){
-     isShipped = true ;
-  }
-  else if(deliveryPercent === 100){
-     isDelivered = true;
-  }
+  // if(deliveryPercent < 33){
+  //    isPreparing = true;
+  // }
+  // else if (deliveryPercent >=33 && deliveryPercent < 100){
+  //    isShipped = true ;
+  // }
+  // else if(deliveryPercent === 100){
+  //    isDelivered = true;
+  // }
+
+
+   const isPreparing = deliveryPercent < 33;
+  const isShipped = deliveryPercent >= 33 && deliveryPercent < 100;
+  const isDelivered = deliveryPercent === 100;
 
 
 
